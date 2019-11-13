@@ -59,14 +59,14 @@ public class UsersController {
         //return user.getUserId()+" "+user.getBirthday()+" "+user.getGender()+" "+user.getEmail();
         //查看服务是否运行	        
         System.out.println("服务正在运行: "+jedis.ping());
-        System.out.println("aaa");
+	//判断redis中有无
         if(jedis.hexists("users", id)) {        	
         	jedis.close();
         	System.out.println("账号已注册,在redis中查到。");
         	return "账号已注册,在redis中查到。";
         }
         jedis.close();
-        System.out.println("bbb");
+        //判断MySQL中有无
         if(service.lookForUser(id)) {
         	System.out.println("账号已注册，在MySQL中查到");
         	return "账号已注册，在MySQL中查到";
